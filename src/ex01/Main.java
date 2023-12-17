@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 class Lock {
 
     Runnable object;
+
     synchronized void push(Runnable o) throws InterruptedException {
         while (object != null) {
             wait();
@@ -27,16 +28,16 @@ public class Main {
         String argc = HandlerInputParametrs.Handler(args[0]);
         Lock lock = new Lock();
         new Thread(() -> {
-            for(int i = 0; i != Integer.parseInt(argc); i++) {
+            for (int i = 0; i != Integer.parseInt(argc); i++) {
                 try {
-                    lock.push(()->System.out.println("Egg"));
+                    lock.push(() -> System.out.println("Egg"));
                 } catch (InterruptedException ignore) { /*NOP*/ }
             }
         }).start();
         new Thread(() -> {
-            for(int i = 0; i != Integer.parseInt(argc); i++) {
+            for (int i = 0; i != Integer.parseInt(argc); i++) {
                 try {
-                    lock.poll(()->System.out.println("Hen"));
+                    lock.poll(() -> System.out.println("Hen"));
                 } catch (InterruptedException ignore) { /*NOP*/ }
             }
         }).start();

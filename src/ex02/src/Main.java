@@ -19,7 +19,6 @@ public class Main {
         Pair<Integer> pair = HandlerInputParametrs.Handler(args[0], args[1]);
         List<Integer> arrayList = ThreadLocalRandom.current().ints(-MAX_VALUE, MAX_VALUE).limit(pair.getFirst()).boxed().toList();
         System.out.println("Sum: " + arrayList.stream().reduce(Integer::sum).get());
-        System.out.println(arrayList);
         Object lock = new Object();
         Sum sum = new Sum();
         final int delimiter = (int) Math.ceil((double) arrayList.size() / pair.getSecond());
